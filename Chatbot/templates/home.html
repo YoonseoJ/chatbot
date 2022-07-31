@@ -25,10 +25,29 @@
         .messages p {
             padding: 0;
             margin-top: 0;
+            margin-bottom: 0.5rem;
         }
 
         .response {
             margin-left: auto;
+        }
+
+        #input {
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            width: 15rem;
+        }
+
+        .submit_div {
+            width: 17.2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .submit {
+            padding: 0.3rem 1rem;
+            width: 15rem;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -38,11 +57,11 @@
 
     <form action="/runscript">
         <input type="text" id="input" name="input" placeholder="enter your message"><br><br>
-        <input type="submit" value="Send message">
+        <div class="submit_div">
+            <input type="submit" value="Send message" class="submit">
+        </div>
     </form>
 
-    <!-- <p id="inputText">message: {{input}}</p>
-    <p id="resultText">response: {{result}}</p> -->
     <div class="messages">
         {% for i in range(0, len) %} 
             {% if i % 2 == 0 %}
