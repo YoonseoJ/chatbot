@@ -39,15 +39,19 @@ from flask import Flask, render_template, redirect, url_for, request
 
 app = Flask(__name__)
 
-fff = "hello test"
+history = []
 
 @app.route("/")
-@app.route("/<result>")
-def home(result):
+def home():
+    result = request.args.get('result')
+    input = request.args.get('input')
+    myhistory = request.args.get('history')
+    print("888")
+    print(history)
     myResult = ""
     if result is not None:
         myResult = result
-    return render_template("home.html", result=myResult)
+    return render_template("home.html", result=myResult, input=input, history=history, len=len(history))
 
 @app.route("/runscript")
 def ScriptPage():
@@ -173,16 +177,15 @@ def ScriptPage():
         for i in list_of_intents: 
             if i["tag"] == tag:
                 result = random.choice(i["responses"])
-            break
+                break
         return result
-    print("test test test")
-    fff = "hi"
     message = myInput
     intents = pred_class(message, words, classes)
     result = get_response(intents, data)
-    print(result)
-    fff = result
-    return redirect(url_for("home", result=result))
+    history.append(myInput)
+    history.append(result)
+    
+    return redirect(url_for("home", result=result, input=myInput, history=history))
 
 
 if __name__ == '__main__': 
