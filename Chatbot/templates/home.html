@@ -4,12 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chatbot</title>
+    <script>
+        function scrollToBottom() {
+            var chatHistory = document.getElementById("messages");
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+    </script>
     <style>
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 0;
+        }
+
+        .main {
+            display: flex;
+            align-items: top;
+            justify-content: center;
+            column-gap: 10rem;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .chat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5rem;
+            margin-left: 3rem;
+            padding-left: 3rem;
         }
 
         .messages {
@@ -17,25 +42,39 @@
             flex-direction: column;
             width: 20rem;
             padding: 2rem;
-            border: 1px solid black;
+            box-shadow: 0 0px 5px rgba(117, 117, 117, 0.25), 0 3px 5px rgba(120, 120, 120, 0.22);
             border-radius: 15px;
-            margin-top: 2rem;
+            margin-top: 0rem;
+            height: 30rem;
+            overflow: scroll;
         }
 
         .messages p {
-            padding: 0;
+            padding: 0.5rem 1rem;
             margin-top: 0;
             margin-bottom: 0.5rem;
         }
 
+        .message {
+            margin-right: auto;
+            border-radius: 10px;
+            border-top-left-radius: 0;
+            background-color: rgb(235, 235, 235);
+        }
+
         .response {
             margin-left: auto;
+            border-radius: 10px;
+            border-top-right-radius: 0;
+            background-color: rgb(229, 234, 226);
         }
 
         #input {
             padding: 0.5rem 1rem;
             border-radius: 10px;
             width: 15rem;
+            border: none;
+            box-shadow: 0 0px 5px rgba(117, 117, 117, 0.25), 0 3px 5px rgba(120, 120, 120, 0.22);
         }
 
         .submit_div {
@@ -45,32 +84,61 @@
         }
 
         .submit {
-            padding: 0.3rem 1rem;
+            padding: 0.5rem 1rem;
             width: 15rem;
             border-radius: 10px;
+            background-color: #adc178;
+            border: none;
+            box-shadow: 0 0px 5px rgba(117, 117, 117, 0.25), 0 3px 5px rgba(120, 120, 120, 0.22);
+        }
+
+        h3 {
+            margin-top: 2rem;
+            margin-left: 1rem;
+        }
+
+        .info {
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            background-color: #c8d2ac;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1rem;
+
         }
     </style>
 </head>
-<body>
-    <h1>Chatbot</h1>
-    <p>Start chatting with our chatbot.</p>
-
-    <form action="/runscript">
-        <input type="text" id="input" name="input" placeholder="enter your message"><br><br>
-        <div class="submit_div">
-            <input type="submit" value="Send message" class="submit">
-        </div>
-    </form>
-
-    <div class="messages">
-        {% for i in range(0, len) %} 
-            {% if i % 2 == 0 %}
-            <p class="message">{{history[i]}}</p>
-            {% else %}
-            <p class="response">{{history[i]}}</p>
-            {% endif %}
-        {% endfor %}
+<body onload="scrollToBottom()">
+    <div class="title">
+        <h1>Covid self assessment chatbot</h1>
     </div>
     
+    <div class="main">
+        <div class="chat">
+            <h2>ChatBot</h2>
+            <p class="info">Start asking your symtoms</p>
+        
+            <form action="/runscript">
+                <input type="text" id="input" name="input" placeholder="enter your message"><br><br>
+                <div class="submit_div">
+                    <input type="submit" value="Send message" class="submit">
+                </div>
+            </form>
+        </div>
+        <div>
+            <h3>Chat messages</h3>
+            <div class="messages" id="messages">
+                {% for i in range(0, len) %} 
+                    {% if i % 2 == 0 %}
+                    <p class="message">{{history[i]}}</p>
+                    {% else %}
+                    <p class="response">{{history[i]}}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>
