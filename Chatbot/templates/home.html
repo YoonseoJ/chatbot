@@ -132,9 +132,9 @@
             <div class="messages" id="messages">
                 {% for i in range(0, len) %} 
                     {% if i % 2 == 0 %}
-                    <p class="message">{{history[i]}}</p>
-                    {% else %}
                     <p class="response">{{history[i]}}</p>
+                    {% else %}
+                    <p class="message">{{history[i]}}</p>
                     {% endif %}
                 {% endfor %}
             </div>
