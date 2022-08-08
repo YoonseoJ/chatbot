@@ -44,7 +44,7 @@ for intent in data["intents"]:
     # add the tag to the classes if it's not there already 
     if intent["tag"] not in classes:
         classes.append(intent["tag"])
-# lemmatize all the words_list in the vocab and convert them to lowercase
+# lemmatize all the words in the vocab and convert them to lowercase
 # if the words_list don't appear in punctuation
 words_list = [lemmatizer.lemmatize(word.lower()) for word in words_list if word not in string.punctuation]
 # sorting the vocab and classes in alphabetical order and taking the # set to ensure no duplicates occur
@@ -55,7 +55,7 @@ classes = sorted(set(classes))
 training = []
 # empty array length of classes array. default value of 0
 out_empty = [0] * len(classes)
-# creating the bag of words_list model
+# creating the bag of words model
 # enumerate gives each item index
 for idx, doc in enumerate(doc_X):
     bow = []
@@ -120,7 +120,7 @@ def bag_of_words_list(text, vocab):
   return np.array(bow)
 
 def pred_class(text, labels): 
-  # create the bag of words_list
+  # create the bag of words
   bow = bag_of_words_list(text, words_list)
   # predict the class
   result = model.predict(np.array([bow]))[0]
