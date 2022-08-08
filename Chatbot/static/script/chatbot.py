@@ -18,7 +18,7 @@ jsonfile = open(pathToDataSet)
 data = json.load(jsonfile)
 jsonfile.close()
 
-# initializing lemmatizer to get stem of words_list
+# initializing lemmatizer to get stem of words
 lemmatizer = WordNetLemmatizer()
 
 # Each list to create
